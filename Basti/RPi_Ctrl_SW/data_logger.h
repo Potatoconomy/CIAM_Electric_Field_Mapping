@@ -12,6 +12,7 @@
 #define DATA_LOGGER_H
 
 #include <stdint.h>
+#include <vector>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ class Data_Logger
 public:
     Data_Logger();
 	~Data_Logger();
+	void save_vector_to_file(vector<uint16_t>& u16_vector); 
 	void data_logging(uint32_t spi_clock_speed, double sampleRate);
 
 private:

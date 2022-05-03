@@ -8,12 +8,16 @@
 // This class makes use of  bcm2835_chip class and rhd2000registers class. 
 //----------------------------------------------------------------------------------
 
+#include <stdint.h>
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
+
 #include "data_logger.h"
 #include "bcm2835_chip.h"
 #include "rhd2000registers.h"
 
-#include <stdint.h>
-#include <stdio.h>
+
 
 using namespace std;
 
@@ -27,6 +31,28 @@ Data_Logger::Data_Logger()
 Data_Logger::~Data_Logger()
 {
 
+}
+
+// Function: Save Vector content in a file (append vector content to existing file)
+void Data_Logger::save_vector_to_file(vector<uint16_t>& u16_vector)
+{
+	int VectorLength = static_cast<int>(u16_vector.size());
+	FILE * pFile;
+
+	pFile = fopen ("rhd2000_results.txt","a");
+	if (pFile != NULL)
+	{
+		fprintf(pFile, "Result Vector content: \n");
+		for (int i = 2; i < VectorLength; i++)
+		{
+			fprintf(pFile, "Result of ADC Channel %d: \t %x \n", (i-2), u16_vector[i]);
+		}
+		fclose (pFile);
+	}
+	else
+	{
+		printf("Error while opening the file! \n");
+	}
 }
 
 
@@ -50,27 +76,47 @@ void Data_Logger::data_logging(uint32_t spi_clock_speed, double rhd2000_sampleRa
 	//Initialize and calibrate RHD2000
 	VectorLength = rhd2000regs.createCommandListRegisterConfig(rhd2000commandVector, true);
 	//Print whole command vector for checking purpose
-	printf("Command Vector Content: \n");
+	printf("Config Command Vector Content: \n");
 	for(int i = 0; i < VectorLength; i++)
 	{
 		printf("Vector Index %d: \t %x \n", i, rhd2000commandVector[i]);
 	}
-	
+	//Perform SPI Transfer, let received half words be stored in rhd2000receivedResVector
 	bcm2835_board.spi_transfer(rhd2000commandVector, rhd2000receivedResVector);	
 	VectorLength = static_cast<int>(rhd2000receivedResVector.size());
 	//Print whole result vector for checking purpose
-	printf("Result Vector Content: \n");
+	printf("Config Result Vector Content: \n");
 	printf("Result Vector Length: %d \n", VectorLength);
 	for(int k = 0; k < VectorLength; k++)
 	{
 		printf("Vector Index %d: \t %x \n", k, rhd2000receivedResVector[k]);
 	}
 	
-	//Read ADC results from all 16 channels
-	//rhd2000regs.createCommandListConvert(rhd2000commandVector);
-	//rhd2000receivedResVector.clear();
-	//bcm2835_board.spi_transfer(rhd2000commandVector, rhd2000receivedResVector);
-	
+	//endless loop that collects ADC results regularly
+	//while(true)
+	//{
+		//Create command vector to let the rhd2000 send out all adc results
+		VectorLength = rhd2000regs.createCommandListConvert(rhd2000commandVector);
+		//Print whole command vector for checking purpose
+		printf("Convert Command Vector Content: \n");
+		for(int i = 0; i < VectorLength; i++)
+		{
+			printf("Vector Index %d: \t %x \n", i, rhd2000commandVector[i]);
+		}
+		//Make sure result vector is empty and can store new results
+		rhd2000receivedResVector.clear();
+		//Perform SPI transfer, let received half words be stored in rhd2000receivedResVector
+		bcm2835_board.spi_transfer(rhd2000commandVector, rhd2000receivedResVector);
+		VectorLength = static_cast<int>(rhd2000receivedResVector.size());
+		//Print whole result vector for checking purpose
+		printf("Convert Result Vector Content: \n");
+		printf("Result Vector Length: %d \n", VectorLength);
+		for(int k = 0; k < VectorLength; k++)
+		{
+			printf("Vector Index %d: \t %x \n", k, rhd2000receivedResVector[k]);
+		}
+		save_vector_to_file(rhd2000receivedResVector);
+	//}
 }
 
 

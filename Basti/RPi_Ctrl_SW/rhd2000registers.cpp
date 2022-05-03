@@ -1089,9 +1089,8 @@ int Rhd2000Registers::createCommandListConvert(vector<uint16_t> &commandList)
         commandList.push_back(createRhd2000Command(Rhd2000CommandConvert, 13));
         commandList.push_back(createRhd2000Command(Rhd2000CommandConvert, 14));
         commandList.push_back(createRhd2000Command(Rhd2000CommandConvert, 15));
-        commandList.push_back(createRhd2000Command(Rhd2000CommandConvert, 16));
-        commandList.push_back(createRhd2000Command(Rhd2000CommandConvert, 16));  //repeat two times because of the chip response delay of two commands
-        commandList.push_back(createRhd2000Command(Rhd2000CommandConvert, 16));
+        commandList.push_back(createRhd2000Command(Rhd2000CommandConvert, 15));  //repeat two times because of the chip response delay of two commands
+        commandList.push_back(createRhd2000Command(Rhd2000CommandConvert, 15));
  
     return commandList.size();
 }
