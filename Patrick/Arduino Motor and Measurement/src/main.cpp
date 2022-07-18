@@ -392,7 +392,7 @@ void perform_round_trip()
     get_adc_measurements();
     print_motor_values(current_pos);
   }
-  set_motor_signals(RVS, 30);
+  set_motor_signals(RVS, 80);
   while(current_pos > 0)
   {
     get_adc_measurements();
