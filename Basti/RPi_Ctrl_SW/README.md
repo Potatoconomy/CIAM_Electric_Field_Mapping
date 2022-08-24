@@ -1,6 +1,6 @@
 # RHD2000 Acquisition SW for Rasperry Pi
 This SW can be used to interface INTAN RHD2216 electrophysiology amplifier chip (16 channel adc).
-It has been tested on a raspberry pi 2 but should also work on other rasperry pis.
+It has been tested on a Raspberry Pi 2 but should also work on other Raspberry Pis.
 
 ## Hardware requirements
 1. Raspberry Pi (including screen, keyboard and mouse or external workstation and LAN cable when using SSH/VNC)
@@ -24,3 +24,16 @@ If you want to delete the measurement data, please type `rm measurement.dat` in 
 
 ## Plotting the data
 You can plot the data saved in measurements.dat using GNUPLOT.
+1. Install GNUPLOT, if not yet installed:
+   ```
+   sudo apt-get update
+   sudo apt-get install gnuplot
+   ```
+2. Change to the directory of the SW and start GNUPLOT:
+   ```
+   cd RPi_Ctrl_SW
+   gnuplot
+   ```
+3.Plot the data by typing `plot 'measurements.dat' u 1:2 with lines`
+Instead you could also plot the data in real time while it is collected by starting GNUPLOT in seperate terminal than the software. 
+Then in GNUPLOT type in `load 'plot_measurements.p`. The plot should reload continuously.
