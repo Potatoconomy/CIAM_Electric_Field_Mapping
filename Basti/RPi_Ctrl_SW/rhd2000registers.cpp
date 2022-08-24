@@ -1094,4 +1094,3 @@ int Rhd2000Registers::createCommandListConvert(vector<uint16_t> &commandList)
  
     return commandList.size();
 }
-

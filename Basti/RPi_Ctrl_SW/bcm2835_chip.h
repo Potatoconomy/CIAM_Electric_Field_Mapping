@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------------
-// Copyright 2022 UniversitĂ¤tsklinikum Freiburg
+// Copyright 2022 UniversitÄ‚Â¤tsklinikum Freiburg
 // Section of Neuroelectronic Systems
 // Authors: Bastian Harder
 // Project: CIAM
@@ -35,4 +35,3 @@ private:
 };
 
 #endif // BCM2835_CHIP_H
-

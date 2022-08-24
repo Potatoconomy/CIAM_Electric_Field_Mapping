@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------------
-// Copyright 2022 Universitätsklinikum Freiburg
+// Copyright 2022 UniversitĂ¤tsklinikum Freiburg
 // Section of Neuroelectronic Systems
 // Authors: Bastian Harder
 // Project: CIAM
@@ -80,9 +80,6 @@ uint8_t BCM2835_Chip::spi_transfer8(uint8_t value)
 void BCM2835_Chip::spi_transfer16(char* tbuf, char* rbuf)
 {	
 	bcm2835_spi_transfernb(tbuf, rbuf, 2);
-	//for debug:
-	//rbuf[0] = tbuf[0];
-	//rbuf[1] = tbuf[1];
 }
 
 //Function: Take a commandList, send the commands over spi, simultanuously save the received answers from slave in receivedList 
@@ -108,6 +105,3 @@ void BCM2835_Chip::spi_transfer(vector<uint16_t> &commandList, vector<uint16_t> 
 		if(i < (num_of_commands-1)) {p_rbuf += 2;}
 	}
 }
-
-
-
