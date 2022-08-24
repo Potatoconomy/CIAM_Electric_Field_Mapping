@@ -22,12 +22,11 @@ public:
     Data_Logger();
 	~Data_Logger();
 	float adc_hex2float(uint16_t adc_result);
-	void save_measurements_to_file(vector<uint16_t>& u16_vector, int timestamp, uint8_t channel); 
-	void data_logging(uint32_t spi_clock_speed, double sampleRate, uint8_t channel);
+	void save_measurements_to_file(vector<uint16_t>& u16_vector, int timestamp, int channel); 
+	void data_logging(uint32_t spi_clock_speed, double sampleRate, int channel);
 
 private:
 
 };
 
 #endif // DATA_LOGGER_H
-
