@@ -167,4 +167,3 @@ private:
 };
 
 #endif // RHD2000REGISTERS_H
-
