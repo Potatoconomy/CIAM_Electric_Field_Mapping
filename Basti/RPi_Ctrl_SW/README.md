@@ -38,6 +38,8 @@ You can plot the data saved in measurements.dat using GNUPLOT.
 Instead you could also plot the data in real time while it is collected by starting GNUPLOT in seperate terminal than the software. 
 Then in GNUPLOT type in `load 'plot_measurements.p`. The plot should reload continuously.
 
+Example plots of very noisy data can be found in the plots folder. 
+
 ## Understanding the SW
 The SW is written in C++ and can be compiled with the provided makefile.
 The purpose of the different SW parts is described in the following.
