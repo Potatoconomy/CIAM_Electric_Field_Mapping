@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <vector>
-#include <bcm2835.h>
+#include "bcm2835-1.71/src/bcm2835.h"
 #include "bcm2835_chip.h"
 
 using namespace std;
