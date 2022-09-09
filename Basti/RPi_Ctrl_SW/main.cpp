@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	int input_argument;
 	int channel_for_plotting = 4;	//default channel
 	cout << "Default Channel: " << channel_for_plotting << endl;
-	//check that there is only one command line argument and that 
+	//check that there is only one command line argument from the user (besides the default argument (application name)) 
 	if(argc == 2)
 	{
 		//convert input to integer
@@ -34,13 +34,14 @@ int main(int argc, char **argv)
 		else
 		{
 			cout << "Please specifiy a channel between 0 and 15!" << endl;
-			cout << "Usage example for Channel 4: sudo ./rhd2000acquisitionmain 4" << endl;
+			cout << "Usage example for Channel 4: sudo ./rhd2000acquisitionmain 4" << endl;			
 		}
 	}
 	else
 	{
-		cout << "Too many or bad command line arguments!" << endl;
+		cout << "Too many command line arguments!" << endl;
 		cout << "Usage example for Channel 4: sudo ./rhd2000acquisitionmain 4" << endl;
+		cout << "Default channel selected now..." << endl;
 	}
 	//Create instance of class data logger and start logging the specified channel
 	Data_Logger data_logger;
