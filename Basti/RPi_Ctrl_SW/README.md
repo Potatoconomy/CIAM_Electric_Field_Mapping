@@ -19,6 +19,7 @@ It has been tested on a Raspberry Pi 2 but should also work on other Raspberry P
    ```
 Insert a number between 0 and 15 for CHANNEL to specify the channel number from which the data shall be saved into a file named measurements.dat.
 In addition, the measurement results of all channels are printed in the terminal. Unit is µV.
+Make sure that the terminal window is big enough! Otherwise the results are not printed on the same line and you get flooded with new lines...
 Whenever you collected enough data, you can abort the application by pressing Ctrl+C.
 If you want to delete the measurement data, please type `rm measurement.dat` in the terminal.
 
