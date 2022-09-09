@@ -8,7 +8,7 @@ clean:
 	rm -f *.o
 	rm -f main
 
-main: main.o data_logger.o rhd2000registers.o bcm2835_chip.o
+main: main.o data_logger.o rhd2000registers.o bcm2835_chip.o bcm2835.o
 	g++ -o main main.o data_logger.o rhd2000registers.o bcm2835_chip.o bcm2835.o
 
 main.o: main.cpp data_logger.h
